@@ -187,7 +187,7 @@ footer{padding-bottom:40px}.faq{padding-bottom:64px}
         <label>Прізвище<input name="last" autocomplete="family-name" required></label>
         <label>Ім’я<input name="first" autocomplete="given-name" required></label>
       </div>
-      <label>По батькові <small>(необов’язково)</small><input name="mid" autocomplete="additional-name"></label>
+      <label>По батькові<input name="mid" autocomplete="additional-name" required></label>
       <label>Номер телефону<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+380" value="+380" required></label>
       <label>Місто<input name="city" autocomplete="address-level2" placeholder="Наприклад, Київ" required></label>
       <label>Відділення або поштомат Нової пошти<input name="np" placeholder="Відділення №12 або поштомат №3456" required></label>
@@ -245,7 +245,7 @@ function normPhone(v){var d=v.replace(/\D/g,'');if(d.length===10&&d[0]==='0')d='
 $('f').addEventListener('submit',function(e){
   e.preventDefault();
   var f=e.target,v=function(n){return f.elements[n].value.trim()},bad=[];
-  ['last','first','phone','city','np'].forEach(function(n){var ok=v(n)&&(n!=='phone'||normPhone(v(n)));f.elements[n].classList.toggle('bad',!ok);if(!ok)bad.push(n)});
+  ['last','first','mid','phone','city','np'].forEach(function(n){var ok=v(n)&&(n!=='phone'||normPhone(v(n)));f.elements[n].classList.toggle('bad',!ok);if(!ok)bad.push(n)});
   if(bad.length){$('er').textContent=bad.indexOf('phone')>-1&&v('phone').length>4?'Вкажіть номер у форматі +380XXXXXXXXX.':'Заповніть виділені поля.';return}
   $('er').textContent='';
   var fio=[v('last'),v('first'),v('mid')].filter(Boolean).join(' ');
